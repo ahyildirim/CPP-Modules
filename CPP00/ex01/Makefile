@@ -1,21 +1,30 @@
-SRCS = PhoneBook.cpp GetterSetter.cpp add.cpp search.cpp
-CC = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
-RM = rm -rf
-OBJS = $(SRCS:.c=.o)
+SRCS = add.cpp GetterSetter.cpp PhoneBook.cpp search.cpp
 
+OBJS = $(SRCS:.cpp=.o)
 NAME = phonebook
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+RM = rm -f
 
-all : $(NAME)
+ifdef DEBUG
+	CXXFLAGS += -g -fsanitize=address
+endif
 
-$(NAME) : $(OBJS)
-		$(CC) $(CPPFLAGS) $(OBJS) -o $(NAME)
+all: $(NAME)
 
-clean : $(RM) $(OBJS)
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-fclean : clean
-		$(RM) $(NAME)
-	
-re : fclean $(NAME)
+debug:
+	$(CXX) -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address  -o $(NAME) $(SRCS)
 
-.PHONY : all clean fclean re
+%.o: %.c
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	$(RM) $(OBJS)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
