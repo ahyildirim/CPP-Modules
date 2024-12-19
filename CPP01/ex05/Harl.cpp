@@ -22,12 +22,14 @@ void Harl::error (void)
 
 void Harl::complain(std::string level)
 {
+    //Fonksiyona pointer dizisi tanımlanıyor ve bu dizinin elemanları sınıfın fonksiyonlarına işaret ediyor.
     void (Harl::*ptrToMember[])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
     std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
     for (int i = 0; i < 4; i++)
     {
         if (levels[i] == level)
         {
+            //Pointer dizisinin i. elemanı fonksiyonu çağırıyor. Yani hangi fonksiyon çağrılacaksa onun pointerı çağrılıyor.
             (this->*ptrToMember[i])();
             return ;
         }
