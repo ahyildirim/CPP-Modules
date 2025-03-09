@@ -1,6 +1,6 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _name("ClapTrap"), _hitpoints(10), _energyPoints(10), _attackDamage(0)
+ClapTrap::ClapTrap() : _name("ClapTrap"), _hitpoints(100), _energyPoints(100), _attackDamage(30)
 {
 	std::cout << "ClapTrap default constructor called" << std::endl;
 }
@@ -19,10 +19,13 @@ ClapTrap::ClapTrap(const ClapTrap& copy)
 ClapTrap& ClapTrap::operator=(const ClapTrap& copy)
 {
 	std::cout << "ClapTrap copy assignation operator called" << std::endl;
-	_name = copy._name;
-	_hitpoints = copy._hitpoints;
-	_energyPoints = copy._energyPoints;
-	_attackDamage = copy._attackDamage;
+	if (this != &copy)
+	{
+		_name = copy._name;
+		_hitpoints = copy._hitpoints;
+		_energyPoints = copy._energyPoints;
+		_attackDamage = copy._attackDamage;
+	}
 	return *this;
 }
 
@@ -31,7 +34,6 @@ ClapTrap::~ClapTrap()
 	std::cout << "ClapTrap destructor called" << std::endl;
 }
 
-//SETTER FUNCTIONS
 void ClapTrap::setName(std::string name)
 {
 	_name = name;
@@ -52,7 +54,6 @@ void ClapTrap::setAttackDamage(unsigned int attackDamage)
 	_attackDamage = attackDamage;
 }
 
-//GETTER FUNCTIONS
 std::string ClapTrap::getName() const
 {
 	return _name;

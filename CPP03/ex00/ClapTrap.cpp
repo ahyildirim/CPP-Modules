@@ -19,10 +19,13 @@ ClapTrap::ClapTrap(const ClapTrap& copy)
 ClapTrap& ClapTrap::operator=(const ClapTrap& copy)
 {
 	std::cout << "ClapTrap copy assignation operator called" << std::endl;
-	_name = copy._name;
-	_hitpoints = copy._hitpoints;
-	_energyPoints = copy._energyPoints;
-	_attackDamage = copy._attackDamage;
+	if (this != &copy)
+	{
+		_name = copy._name;
+		_hitpoints = copy._hitpoints;
+		_energyPoints = copy._energyPoints;
+		_attackDamage = copy._attackDamage;
+	}
 	return *this;
 }
 
@@ -31,7 +34,6 @@ ClapTrap::~ClapTrap()
 	std::cout << "ClapTrap destructor called" << std::endl;
 }
 
-//SETTER FUNCTIONS
 void ClapTrap::setHitpoints(int hitpoints)
 {
 	_hitpoints = hitpoints;
@@ -47,7 +49,6 @@ void ClapTrap::setAttackDamage(unsigned int attackDamage)
 	_attackDamage = attackDamage;
 }
 
-//GETTER FUNCTIONS
 std::string ClapTrap::getName() const
 {
 	return _name;

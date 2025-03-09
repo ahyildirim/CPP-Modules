@@ -3,18 +3,12 @@
 ScavTrap::ScavTrap() : ClapTrap()
 {
 	std::cout << "ScavTrap default constructor called" << std::endl;
-	setHitpoints(100);
-	setEnergyPoints(50);
-	setAttackDamage(20);
 	this->_isGuarding = false;
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << "ScavTrap name constructor called" << std::endl;
-	setHitpoints(100);
-	setEnergyPoints(50);
-	setAttackDamage(20);
 	this->_isGuarding = false;
 }
 
@@ -27,11 +21,14 @@ ScavTrap::ScavTrap(const ScavTrap& copy) : ClapTrap(copy)
 ScavTrap& ScavTrap::operator=(const ScavTrap& copy)
 {
 	std::cout << "ScavTrap copy assignation operator called" << std::endl;
-	setName(copy.getName());
-	setHitpoints(copy.getHitpoints());
-	setEnergyPoints(copy.getEnergyPoints());
-	setAttackDamage(copy.getAttackDamage());
-	this->_isGuarding = copy._isGuarding;
+	if (this != &copy)
+	{
+		setName(copy.getName());
+		setHitpoints(copy.getHitpoints());
+		setEnergyPoints(copy.getEnergyPoints());
+		setAttackDamage(copy.getAttackDamage());
+		this->_isGuarding = copy._isGuarding;
+	}
 	return *this;
 }
 

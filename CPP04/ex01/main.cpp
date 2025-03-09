@@ -34,11 +34,28 @@ int main()
 
 	std::cout << "Dog 1 ideas:" << std::endl;
 	dog1->getIdeas();
-	delete dog1;
 
 	std::cout << "Dog 2 ideas:" << std::endl;
+	dog2->setIdea(5, "I hate bones");
 	dog2->getIdeas();
+	std::cout << "------------NEW DOG1 IDEAS--------------" << std::endl;
+	dog1->getIdeas();
+	delete dog1;
 	delete dog2;
+
+	Dog *a = new Dog();
+	Dog *b(a);
+
+	std::cout << "-----------DOG A IDEAS--------------" << std::endl;
+	a->setIdea(2, "Ahmet");
+	a->getIdeas();
+	std::cout << "-----------DOG B IDEAS--------------" << std::endl;
+	b->setIdea(2, "Hakan");
+	b->getIdeas();
+	std::cout << "-----------NEW DOG A IDEAS--------------" << std::endl;
+	a->getIdeas();
+
+	delete b;
 
 	return 0;
 }
