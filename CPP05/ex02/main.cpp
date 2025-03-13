@@ -1,5 +1,8 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 /*
 CPP'de Stack Unwinding ismi ile adlandırılan nesne yok etme sırası vardır;
@@ -13,33 +16,19 @@ int main()
 {
     std::cout << "----------NO EXCEPTION----------" << std::endl;
     try{
-        Bureaucrat ahmet("Bureaucrat Ahmet", 42);
-        std::cout << ahmet << std::endl;
-        Form form1("Form A", 43, 43);
-        std::cout << form1 << std::endl;
-        ahmet.signForm(form1);
-    }
-    catch (std::exception& e){
-        std::cout << e.what() << std::endl;
-    }
-
-    std::cout << "----------GRADETOOHIGH(CONSTRUCTOR)----------" << std::endl;
-    try{
-        Bureaucrat hakan("Bureaucrat Hakan", 15);
-        std::cout << hakan << std::endl;
-        Form form2("Form B", 0, 0);
-        std::cout << form2 << std::endl;
-    }
-    catch (std::exception& e){
-        std::cout << e.what() << std::endl;
-    }
-
-    std::cout << "----------GRADETOOLOW(CONSTRUCTOR)----------" << std::endl;
-    try{
-        Bureaucrat yusuf("Bureaucrat Yusuf", 15);
-        std::cout << yusuf << std::endl;
-        Form form3("Form C", 151, 151);
-        std::cout << form3 << std::endl;
+        Bureaucrat ahmet("Bureaucrat Ahmet", 1);
+        ShrubberyCreationForm shrub("testShrub");
+        PresidentialPardonForm pres("Ali");
+        RobotomyRequestForm robot("Kerem");
+        std::cout << std::endl;
+        ahmet.signAForm(shrub);
+        ahmet.executeForm(shrub);
+        std::cout << std::endl;
+        ahmet.signAForm(pres);
+        ahmet.executeForm(pres);
+        std::cout << std::endl;
+        ahmet.signAForm(robot);
+        ahmet.executeForm(robot);
     }
     catch (std::exception& e){
         std::cout << e.what() << std::endl;
@@ -47,11 +36,52 @@ int main()
 
     std::cout << "----------GRADETOOLOW----------" << std::endl;
     try{
-        Bureaucrat huseyin("Bureaucrat Hüseyin", 27);
-        std::cout << huseyin << std::endl;
-        Form form4("Form D", 26, 26);
-        std::cout << form4 << std::endl;
-        huseyin.signForm(form4);
+        Bureaucrat hakan("Bureaucrat Hakan", 1);
+        ShrubberyCreationForm shrub1("testShrub");
+        PresidentialPardonForm pres1("Ali");
+        RobotomyRequestForm robot1("Kerem");
+        std::cout << std::endl;
+        hakan.signAForm(shrub1);
+        hakan.executeForm(shrub1);
+        std::cout << std::endl;
+        hakan.signAForm(pres1);
+        hakan.executeForm(pres1);
+        std::cout << std::endl;
+        hakan.signAForm(robot1);
+        hakan.executeForm(robot1);
+    }
+    catch (std::exception& e){
+        std::cout << e.what() << std::endl;
+    }
+
+    std::cout << "----------ALREADYSIGNED----------" << std::endl;
+    try{
+        Bureaucrat mehmet("Bureaucrat Mehmet", 1);
+        ShrubberyCreationForm shrub2("testShrub");
+        PresidentialPardonForm pres2("Ali");
+        RobotomyRequestForm robot2("Kerem");
+        std::cout << std::endl;
+        mehmet.signAForm(shrub2);
+        mehmet.signAForm(shrub2);
+        mehmet.signAForm(pres2);
+        mehmet.signAForm(pres2);
+        mehmet.signAForm(robot2);
+        mehmet.signAForm(robot2);
+    }
+    catch (std::exception& e){
+        std::cout << e.what() << std::endl;
+    }
+
+    std::cout << "----------NOTSIGNED----------" << std::endl;
+    try{
+        Bureaucrat huseyin("Bureaucrat Hüseyin", 1);
+        ShrubberyCreationForm shrub3("testShrub");
+        PresidentialPardonForm pres3("Ali");
+        RobotomyRequestForm robot3("Kerem");
+        std::cout << std::endl;
+        huseyin.executeForm(shrub3);
+        huseyin.executeForm(pres3);
+        huseyin.executeForm(robot3);
     }
     catch (std::exception& e){
         std::cout << e.what() << std::endl;

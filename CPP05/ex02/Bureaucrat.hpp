@@ -4,7 +4,7 @@
 # include <iostream>
 # include <string>
 
-class Form;
+class AForm;
 
 class Bureaucrat{
 
@@ -18,11 +18,12 @@ class Bureaucrat{
         Bureaucrat& operator=(const Bureaucrat& copy);
         ~Bureaucrat();
 
-        const std::string getName();
-        int getGrade();
+        std::string getName() const;
+        int getGrade() const;
         void increaseGrade();
         void decraseGrade();
-        void signForm(Form& form);
+        void signAForm(AForm& AForm);
+        void executeForm(AForm const& form);
         
         class GradeTooHighException : public std::exception{
             public:
