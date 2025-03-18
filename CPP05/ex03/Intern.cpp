@@ -29,30 +29,45 @@ Intern::~Intern()
 
 const char* Intern::NotAFormException::what() const throw()
 {
-    return "There is no Form"
+    return "There is no Form";
+}
+
+AForm *Intern::createShrubberyCreationForm(const std::string target)
+{
+	return new ShrubberyCreationForm(target);
+}
+
+AForm *Intern::createRobotomyRequestForm(const std::string target)
+{
+	return new RobotomyRequestForm(target);
+}
+
+AForm *Intern::createPresidentialPardonForm(const std::string target)
+{
+	return new PresidentialPardonForm(target);
 }
 
 AForm *Intern::makeForm(const std::string name, const std::string target)
 {
-    int i = -1;
-    const std::string nameList[3] = {"PresidentialPardonForm", "ShrubberyCreationForm", "RobotomyRequestForm"};
-    AForm *form;
-
-    while (++i < 3)
-        if (!nameList[i].compare(name))
-            break;
-    
-    std::cout << "i: " << i << std::endl; //Debug;
-    switch(i)
-    {
-        case 0:
-            form = new PresidentialPardonForm(target);
-        case 1:
-            form = new ShrubberyCreationForm(target);
-        case 2:
-            form = new RobotomyRequestForm(target);
-        default:
-            
-    }
+    AForm *(Intern::*forms[])(const std::string) = {
+        &Intern::createShrubberyCreationForm,
+        &Intern::createRobotomyRequestForm,
+        &Intern::createPresidentialPardonForm
+    };
+	std::string formNames[] = {
+		"ShrubberyCreationForm",
+		"RobotomyRequestForm",
+		"PresidentialPardonForm"
+	};
+	for (int i = 0; i < 3; i++)
+	{
+		if (name == formNames[i])
+		{
+			std::cout << "Intern creates " << name << std::endl;
+			return (this->*forms[i])(target);
+		}
+	}
+	throw NotAFormException();
+	return NULL;
 }
 

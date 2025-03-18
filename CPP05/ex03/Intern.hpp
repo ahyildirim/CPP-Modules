@@ -16,6 +16,10 @@ class Intern{
         ~Intern();
 
         AForm *makeForm(const std::string name, const std::string target);
+	
+		AForm *createPresidentialPardonForm(const std::string target);
+		AForm *createRobotomyRequestForm(const std::string target);
+		AForm *createShrubberyCreationForm(const std::string target);
 
         class NotAFormException : public std::exception{
             public:
