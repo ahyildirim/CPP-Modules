@@ -17,17 +17,17 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& cop
     *this = copy;
 }
 
+PresidentialPardonForm::~PresidentialPardonForm()
+{
+    std::cout << "PresidentialPardonForm destructor called." << std::endl;
+}
+
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& copy)
 {
     std::cout << "PresidentialPardonForm Copy Assignation Operator Called" << std::endl;
     if (this != &copy)
-        
+        this->_target = copy._target;
     return *this;
-}
-
-PresidentialPardonForm::~PresidentialPardonForm()
-{
-    std::cout << "PresidentialPardonForm Destructor Called" << std::endl;
 }
 
 void PresidentialPardonForm::execute(Bureaucrat const& executor) const
